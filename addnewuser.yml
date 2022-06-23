@@ -1,0 +1,15 @@
+---
+- name: adding new user to the servers
+  hosts: all
+  remote_user: vagrant
+  tasks:
+    - name: adding user mourad
+      ansible.builtin.user:
+        name: mourad
+        group: sudo
+        shell: /bin/bash
+        # generate a criptes passwd with cm "mkpasswd --method=sha-512" and paste it here
+        password: $6$HDkXfoKX02Rqd$s.DOWzm41HyMBh95pkPAkBnIYVcPFNeVwwUbV6O0SQUOAtr4MgSkhi/cUQZxmBCBAzUcoRQ98YHS0iuj52gfP/
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file: /home/mourad/.ssh/id_rsa
