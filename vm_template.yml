@@ -1,0 +1,18 @@
+---
+- name: Create a VM from a template
+  hosts: localhost
+  gather_facts: no
+  tasks:
+  - name: Clone the template
+    vmware_guest:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vm_sdt_username }}"
+      password: "{{ vm_sdt_password }}"
+      validate_certs: False
+      name: vmsdt-lakhtibi-CLONE.becode.org
+      template: "{{ vm_sdt_template }}"
+      esxi_hostname: "{{ m_sdt_esxi_hostname }}"
+      datastore : "{{ vm_sdt_datastore }}"
+      folder: "{{ vm_sdt_folder }}"
+      state: poweredon
+      wait_for_ip_address: yes
