@@ -2,7 +2,8 @@
 192.168.56.10
 [dbserver]
 192.168.56.11
-[vcenterhost]
-vc.becode.org
+[stackservers]
+192.168.56.10
+192.168.56.11
 [ansible_ssh_private_key_file]
 ./vcenterkey
