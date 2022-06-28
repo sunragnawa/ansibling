@@ -13,5 +13,4 @@ vm_sdt_disk_size_gb:                "20"
 vm_sdt_network:                     "LAN"
 vm_sdt_folder:                      "LoveLace 8"
 vm_sdt_start_connected:             true
-vm_sdt_username:                    "lakhtibi@becode.org"
-vm_sdt_password:                    ./secret.yml                    
+vm_sdt_username:                    "lakhtibi@becode.org"                   

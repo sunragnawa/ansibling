@@ -1,18 +1,42 @@
----
-- name: Create a VM from a template
-  hosts: localhost
+- hosts: localhost
   gather_facts: no
+  vars_files: ["{{playbook_dir}}/vm_vars.yml"]
   tasks:
-  - name: Clone the template
-    vmware_guest:
-      hostname: "{{ vcenter_hostname }}"
-      username: "{{ vm_sdt_username }}"
-      password: "{{ vm_sdt_password }}"
-      validate_certs: False
-      name: vmsdt-lakhtibi-CLONE.becode.org
-      template: "{{ vm_sdt_template }}"
-      esxi_hostname: "{{ m_sdt_esxi_hostname }}"
-      datastore : "{{ vm_sdt_datastore }}"
-      folder: "{{ vm_sdt_folder }}"
-      state: poweredon
-      wait_for_ip_address: yes
+    - name: Inport secrets
+      include_vars:
+        dir: ./
+        files_matching: secret.yml
+      when: false
+    - name: Clone the template
+      vmware_guest:
+        validate_certs: "{{ vcenter_validate_certs }}"
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        folder: "LoveLace 8"
+        esxi_hostname: "{{ vm_sdt_esxi_hostname }}"
+        datacenter: "{{ vcenter_datacenter }}"
+        name: "vmsdt-lakhtibi-clone"
+        state: poweredon
+        force: True
+        template: "{{ vm_sdt_template }}"
+        disk:
+        - size_gb: "{{ vm_sdt_disk_size_gb }}"
+          type: thin
+          datastore: "{{ vm_sdt_datastore }}"
+        hardware:
+          memory_mb: "{{ vm_sdt_mem_size }}"
+          num_cpus: "{{ vm_sdt_cpu_num }}"
+          scsi: paravirtual
+          memory_reservation_lock: "{{ vm_sdt_memory_reservation_lock }}"
+          hotadd_cpu: True
+          hotremove_cpu: True
+          hotadd_memory: False
+          boot_firmware: "efi"
+        networks:
+        - name: "{{ vm_sdt_network }}"
+        wait_for_ip_address: True
+        customization:
+          hostname: "vmsdt-lakhtibi-clone.becode.org"
+      delegate_to: localhost
+      when: false
