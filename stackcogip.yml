@@ -1,0 +1,12 @@
+---
+- name: creatin cogipwebstack
+  hosts: localhost
+  become: true
+  pre_tasks: 
+  - name: updating apt
+    apt: 
+    - update_cache: yes
+      name: 
+
+
+

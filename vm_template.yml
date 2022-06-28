@@ -6,7 +6,12 @@
       include_vars:
         dir: ./
         files_matching: secret.yml
+<<<<<<< HEAD
       when: false
+=======
+      when: True
+
+>>>>>>> 816bf43c051aed46a61940a80662fe6083223d1e
     - name: Clone the template
       vmware_guest:
         validate_certs: "{{ vcenter_validate_certs }}"
@@ -17,8 +22,13 @@
         esxi_hostname: "{{ vm_sdt_esxi_hostname }}"
         datacenter: "{{ vcenter_datacenter }}"
         name: "vmsdt-lakhtibi-clone"
+<<<<<<< HEAD
         state: poweredon
         force: True
+=======
+        force: True
+        state: poweredon
+>>>>>>> 816bf43c051aed46a61940a80662fe6083223d1e
         template: "{{ vm_sdt_template }}"
         disk:
         - size_gb: "{{ vm_sdt_disk_size_gb }}"
@@ -37,6 +47,12 @@
         - name: "{{ vm_sdt_network }}"
         wait_for_ip_address: True
         customization:
+<<<<<<< HEAD
           hostname: "vmsdt-lakhtibi-clone.becode.org"
       delegate_to: localhost
       when: false
+=======
+          hostname: "vmsdt-lakhtibi-clone"
+      delegate_to: localhost
+      when: True
+>>>>>>> 816bf43c051aed46a61940a80662fe6083223d1e
